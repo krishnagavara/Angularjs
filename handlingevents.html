@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Likes/Dislikes increment and decrement</title>
+	<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
+</head>
+<body>
+	<div ng-app="myApp" ng-controller="myController">
+		<table border="1">
+			<thead>
+				<th>Subject</th>
+				<th>Likes</th>
+				<th>Dislikes</th>
+				<th>Like/Dislikes</th>
+			</thead>
+			<tbody>
+				<tr ng-repeat="tech in technologies">
+					<td>{{ tech.name}}</td>
+					<td>{{ tech.Likes}}</td>
+					<td>{{ tech.Dislikes}}</td>
+					<td>
+						<input type="button" name="like" value="Like" ng-click="likesIncrement(tech)">
+						<input type="button" name="dislike" value="Dislike" ng-click="dislkesIncrement(tech)">
+					</td>
+
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+<script type="text/javascript">
+	var app =  angular.module('myApp',[]);
+	app.controller('myController',function($scope)
+	{
+ 		var technologies = 
+ 		[
+ 			{name:"C#",Likes:0,Dislikes:0},
+ 			{name:"Java",Likes:0,Dislikes:0},
+ 			{name:"Php",Likes:0,Dislikes:0},
+ 			{name:".Net",Likes:0,Dislikes:0},
+ 			{name:"AngularJs",Likes:0,Dislikes:0},
+ 		];
+ 		$scope.technologies = technologies;
+ 		$scope.likesIncrement = function(technology)
+ 		{
+ 			technology.Likes++;
+ 		}
+ 		$scope.dislkesIncrement = function(technology)
+ 		{
+ 			technology.Dislikes++;
+ 		}
+	});
+</script>
+</html>

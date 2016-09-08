@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Controller Example</title>
+	<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
+</head>
+<body>
+	<div ng-app="myApp" ng-controller="studentController">
+		Enter First Name : <input type="text" ng-model="student.firstName">
+		<br/>
+		Enter Last Name : <input type="text" ng-model="student.lastName">
+		<br/>
+		Hello {{student.fullName() | uppercase}}
+		have Money {{student.Money | currency:'&#8377;'}}
+		<br/>
+		Search By subjects :  <input type="text" ng-model="subjectName">
+
+		 <ul>
+                     <li ng-repeat = "subject in student.subjects | filter: subjectName |orderBy:'marks'">
+                        {{ subject.name + ', marks:' + subject.marks }}
+                     </li>
+                  </ul>
+	</div>
+	<script type="text/javascript">	
+		var app = angular.module('myApp',[]);
+		app.controller('studentController',function($scope)
+		{
+			$scope.student = 
+			{
+				firstName : "krishna",
+				lastName  : "Gavara",
+				Money     : 50000,
+				subjects:[
+		                  {name:'Physics',marks:70},
+		                  {name:'Chemistry',marks:80},
+		                  {name:'Math',marks:65}
+              			 ],
+				fullName  : function()
+				{
+					var studentObject;
+					studentObject = $scope.student;
+					return studentObject.firstName + " " + studentObject.lastName;
+				}
+			};
+		});
+	</script>
+</body>
+</html>
