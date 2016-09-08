@@ -1,0 +1,63 @@
+<!Doctype html>
+<html>
+   <head>
+      <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
+      <script type="text/javascript" src="script.js"></script>
+   </head>   
+   <body>
+        <h2>Angular Js Application</h2>
+        <div ng-app="myApp" ng-controller="studentController">
+        <table border="0">
+            <tr>
+                <td>
+                     <td>Enter first name:</td>
+                     <td><input type="text" name="firstName" ng-model="student.firstName"></td>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                     <td>Enter last name:</td>
+                     <td><input type="text" name="lastName" ng-model="student.lastName"></td>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                     <td>Enter Fees:</td>
+                     <td><input type="text" name="fees" ng-model="student.fees"></td>
+                </td>
+            </tr>
+               <tr>
+               <td>Enter subject: </td>
+               <td><input type = "text" ng-model = "subjectName"></td>
+            </tr>
+        </table>
+        <br/>
+        <table border = "0">
+            <tr>
+               <td>Name in Upper Case: </td><td>{{student.fullName() | uppercase}}</td>
+            </tr>
+         
+            <tr>
+               <td>Name in Lower Case: </td><td>{{student.fullName() | lowercase}}</td>
+            </tr>
+         
+            <tr>
+               <td>fees: </td><td>{{student.fees | currency}}
+               </td>
+            </tr>
+                
+            <tr>
+               <td>Subject:</td>
+
+               <td>
+                  <ul>
+                     <li ng-repeat = "subject in student.subjects | filter: subjectName |orderBy:'marks'">
+                        {{ subject.name + ', marks:' + subject.marks }}
+                     </li>
+                  </ul>
+               </td>
+            </tr>
+         </table>
+        </div>
+   </body>
+</html>
