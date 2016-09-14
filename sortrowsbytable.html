@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sort Rows by Table example in Angular js</title>
+	<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div ng-app="myApp" ng-controller="myController">
+		<table border="1">
+			<thead>
+				<tr>
+					<th ng-click="sortlist('name')">
+					   	 Name <div ng-class="getSortClass('name')"></div>
+ 					 </th>
+					<th ng-click="sortlist('dateofbirth')">
+						 Date Of Birth <div ng-class="getSortClass('dateofbirth')"></div>
+					</th>
+					<th ng-click="sortlist('gender')">
+						 Gender <div ng-class="getSortClass('gender')"></div>
+					 </th>
+					<th ng-click="sortlist('salary')">
+						 Salary <div ng-class="getSortClass('salary')"></div>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="employee in employees | orderBy:sortColumn:reverseSort">
+					<td>{{ employee.name | uppercase}}</td>
+					<td>{{ employee.dateofbirth | date:"dd-mm-yyyy" }}</td>
+					<td>{{ employee.gender }}</td>
+					<td>{{ employee.salary }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<script type="text/javascript">
+		var app = angular.module('myApp',[]);
+		app.controller('myController',function($scope)
+		{
+ 			var employees =
+ 			[
+ 				{name:'krishna',dateofbirth: new Date('November 27 1990'),gender:'male',salary:30000},
+ 				{name:'sai',dateofbirth: new Date('December 15 1880'),gender:'male',salary:20000},
+ 				{name:'raj',dateofbirth: new Date('January 10 1993'),gender:'male',salary:40000},
+ 				{name:'punna',dateofbirth: new Date('March 16 1993'),gender:'male',salary:20000},
+ 				{name:'noor',dateofbirth: new Date('April 11 1985'),gender:'male',salary:40000},
+ 				{name:'siddarth',dateofbirth: new Date('June 20 1991'),gender:'male',salary:30000},
+ 			];
+ 			$scope.employees = employees;
+ 			$scope.sortColumn = 'name';
+ 			$scope.reverseSort = false;
+ 			$scope.sortlist = function(employee)
+ 			{
+ 				$scope.reverseSort  = ($scope.sortColumn == employee) ?  !$scope.reverseSort : false;
+ 				$scope.sortColumn = employee;
+ 			}
+ 			$scope.getSortClass = function(employee)
+ 			{
+ 				if($scope.sortColumn == employee)
+ 				{
+ 					return $scope.reverseSort ? 'arrow-down' : 'arrow-up'	
+ 				}
+ 				return '';
+ 			}
+
+		});
+	</script>
+</body>
+</html>

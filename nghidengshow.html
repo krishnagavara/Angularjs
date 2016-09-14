@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ng Hide and Ng Show Example for Angular js</title>
+	<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
+</head>
+<body>
+	<div ng-app="myApp" ng-controller="myController">
+	<input type="checkbox" name="hide-show" ng-model="hidesalary"> Hide Salary
+		<table border="1">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Designation</th>
+					<th>Gender</th>
+					<th ng-hide="hidesalary">Salary</th>
+					<th ng-show="hidesalary">Salary</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="employee in employees">
+					<td>{{ employee.name}}</td>
+					<td>{{ employee.designation}}</td>
+					<td>{{ employee.gender}}</td>
+					<td ng-hide="hidesalary">{{ employee.salary}}</td>
+					<td ng-show="hidesalary">#####</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<script type="text/javascript">
+		var app = angular.module('myApp',[])
+		.controller('myController',function($scope)
+		{
+			var employees =
+			[
+				{name:"krishna",designation:"Php",gender:"male",salary:25000},
+				{name:"raj",designation:"Java",gender:"male",salary:25000},
+				{name:"punna",designation:".Net",gender:"male",salary:25000},
+				{name:"sai",designation:"AngularJs",gender:"male",salary:25000},
+				{name:"atousa",designation:"Ui Developer",gender:"male",salary:25000},
+				{name:"noor",designation:"Magento",gender:"male",salary:25000},
+			];
+			$scope.employees = employees;
+		});
+	</script>
+</body>
+</html>

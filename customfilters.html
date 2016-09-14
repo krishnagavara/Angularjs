@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Custom filters Examples</title>
+	<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
+</head>
+<body>
+
+	<div ng-app="myApp" ng-controller="myController">
+		<table>
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Gender</th>
+					<th>Salary</th>		
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="employee in employees">
+					<td>{{ employee.name}}</td>
+					<td>{{ employee.gender | gender}}</td>
+					<td>{{ employee.salary}}</td>
+
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<script type="text/javascript">
+		var app = angular.module('myApp',[]);
+		app.filter("gender",function()
+		{
+ 			return function(gender)
+ 			{
+ 				switch(gender)
+ 				{
+ 					case 1:
+ 						return "male";
+ 						case 2:
+ 						return "Female";
+ 						case 3:
+ 						return "Not Disclosed";
+ 				}
+ 			}
+		});
+		app.controller('myController',function($scope)
+		{
+			var employees =
+			[
+				{name:"krishna",gender:1,salary:30000},
+				{name:"punna",gender:1,salary:20000},
+				{name:"atousa",gender:2,salary:10000},
+				{name:"raj",gender:1,salary:40000},
+				{name:"Jabeen",gender:2,salary:20000},
+			];
+			$scope.employees = employees;
+		});
+	</script>
+</body>
+</html>
